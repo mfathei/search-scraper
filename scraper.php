@@ -95,6 +95,7 @@ if (isset($_POST['footprint'])) {
     <head>
         <title>Google Scraper</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="http://codegena.com/assets/css/image-preview-for-link.css" rel="stylesheet">
     </head>
     <body>
         <div id="app"  class="container">
@@ -116,7 +117,7 @@ if (isset($_POST['footprint'])) {
 
                 <?php
                 $i = 1;
-                $body = '  <table width="60%" class="table table-striped  table-bordered">
+                $body = '  <table id="tbl" width="60%" class="table table-striped  table-bordered">
                     <thead>
                     <th width="5%">ID</th>
                     <th width="10%">Title</th>
@@ -131,12 +132,15 @@ if (isset($_POST['footprint'])) {
                             '<td width="10%">' . $line['title'] . '</td>' .
     //                            '<td style="width:\'20px\'">' . $line['link'] . '</td>' .
                             '<td style="width:\'20px\'"><a href="' . $line['link'] . '"  target="_blank" >' . $line['link'] . ' </a></td>' .
-                            '<td width="30%">' . $line['description'] . '</td>'
-                            . '</tr>';
+                            '<td width="30%">' . $line['description'] . '</td>'.
+                            '</tr>';
                 }
 
                 $body .= '</tbody></table>';
                 echo '<img id="img" /> <button id="getImage">Get Image</button>';
+                echo '<p id="p1"><a href="http://cnet.com?output=embed";">Cnet</a></p>
+                <p id="p2"><a href="http://codegena.com">Codegena</a></p>
+                <p id="p3"><a href="http://apple.com">Apple</a></p>';
                 echo '<b>Total: ' . count($result).'</b><br>' ;
                 
                 echo $body;
@@ -144,6 +148,7 @@ if (isset($_POST['footprint'])) {
             </div>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="http://codegena.com/assets/js/image-preview-for-link.js"></script>
         <script>
             $(document).ready(function(){
 
@@ -166,6 +171,12 @@ if (isset($_POST['footprint'])) {
                 }
 
                 $('#getImage').click(getImage);
+
+                $(function() {
+                    $('#p1 a').miniPreview({ prefetch: 'pageload' });
+                    $('#tbl td a').miniPreview({ prefetch: 'parenthover' });
+                    // $('#p3 a').miniPreview({ prefetch: 'none' });
+                });
             });
         </script>
     </body>
